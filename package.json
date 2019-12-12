@@ -1,0 +1,19 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "this is app like amazon that you can purchase any thing that is availabe in website ",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elhamposhtiban/bamazon.git"
+  },
+  "author": "elham poshtiban",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elhamposhtiban/bamazon/issues"
+  },
+  "homepage": "https://github.com/elhamposhtiban/bamazon#readme"
+}
