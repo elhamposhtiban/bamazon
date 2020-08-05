@@ -124,9 +124,9 @@ function displayItems() {
 
             for (let i = 0; i < res.length; i++ ) {
 
-              if ( res[i].id === parseInt(itemId) ) {
+            if ( res[i].id === parseInt(itemId) ) {
 
-              chosenItem = res[i];
+            chosenItem = res[i];
                 
             }
             
@@ -135,35 +135,34 @@ function displayItems() {
            
             if (chosenItem.stock_quantity < parseInt(quantityProduct)) {
 
-              console.log(`\n \n ooppss! so sorry there is not enough quantity of ${chosenItem.product_name}`)
-          
-              displayItems()
+            console.log(`\n \n ooppss! so sorry there is not enough quantity of ${chosenItem.product_name}`)
+        
+            displayItems()
            
             } else {
 
-                const query = "update products set ? where ?"
-                connection.query (
+            const query = "update products set ? where ?"
+            connection.query (
 
-                    query,
-                    [
-                       
-                        {stock_quantity : (parseInt(chosenItem.stock_quantity) - parseInt(quantityProduct))} ,
+                query,
+                [
+                    
+                    {stock_quantity : (parseInt(chosenItem.stock_quantity) - parseInt(quantityProduct))} ,
 
-                        {id : itemId}
-                    ],
+                    {id : itemId}
+                ],
 
-                    function(err) {
-                        if (err) throw err;
-                
-                        let totalPrice = parseInt(chosenItem.price) * parseInt(quantityProduct)
-                        console.log(chalk.magenta.inverse(`\n YOUR TOTAL IS : ${totalPrice}
-                        \n YOUR PURCHASED : ${chosenItem.product_name}` + `\n ${quantityProduct}`))
+                function(err) {
 
-                      displayItems()
-                      }
+                  if (err) throw err;
+            
+                  let totalPrice = parseInt(chosenItem.price) * parseInt(quantityProduct)
+                  console.log(chalk.magenta.inverse(`\n YOUR TOTAL IS : ${totalPrice}
+                  \n YOUR PURCHASED : ${chosenItem.product_name}` + `\n ${quantityProduct}`))
 
-
-                       )
+                  displayItems()
+                  }
+                    )
                }
         })
 
