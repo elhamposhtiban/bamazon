@@ -16,6 +16,7 @@ const connection = mysql.createConnection({
 });
 
 connection.connect(function (err) {
+
     if (err) throw err;
     // console.log(connection);
     console.log("connected as id" + connection.threadId);
@@ -26,6 +27,7 @@ connection.connect(function (err) {
 })
 
 function displayItems() {
+
     connection.query("select * from products", function (err, res) {
 
      if (err) throw err;
@@ -68,7 +70,7 @@ function displayItems() {
  function start() {
 
        
-     inquirer.prompt([
+    inquirer.prompt([
 
         {
 
@@ -98,32 +100,33 @@ function displayItems() {
 
          ])
 
-        .then(function(response){
+      .then(function(response){
 
 
-            const itemId = response.productId;
-            const quantityProduct = response.quantity;
+      const itemId = response.productId;
+      const quantityProduct = response.quantity;
 
-            const query = "select * from products where ?";
+      const query = "select * from products where ?";
 
         connection.query(
 
             query,
         
-             {id:itemId},
-             
-             function (err, res) {
+            { id: itemId },
+            
+            function (err, res) {
         
             if (err) throw err;
+
             const data = res.map ((products)=> [products.id, products.product_name, products.department_name, products.price, products.stock_quantity])
 
-             let chosenItem ;
+            let chosenItem ;
 
-              for (let i = 0; i < res.length; i++ ) {
+            for (let i = 0; i < res.length; i++ ) {
 
-                 if ( res[i].id === parseInt(itemId) ) {
+              if ( res[i].id === parseInt(itemId) ) {
 
-                 chosenItem = res[i];
+              chosenItem = res[i];
                 
             }
             
@@ -131,11 +134,13 @@ function displayItems() {
              
            
             if (chosenItem.stock_quantity < parseInt(quantityProduct)) {
-                console.log(`\n \n ooppss! so sorry there is not enough quantity of ${chosenItem.product_name}`)
-           
-                displayItems()
+
+              console.log(`\n \n ooppss! so sorry there is not enough quantity of ${chosenItem.product_name}`)
+          
+              displayItems()
            
             } else {
+
                 const query = "update products set ? where ?"
                 connection.query (
 
